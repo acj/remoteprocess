@@ -1,3 +1,4 @@
+use std::os::windows::io::RawHandle;
 use winapi::um::processthreadsapi::GetThreadContext;
 use winapi::um::winnt::{CONTEXT, HANDLE, IMAGE_FILE_MACHINE_AMD64};
 
@@ -24,7 +25,7 @@ impl Unwinder {
     }
 
     pub fn cursor(&self, thread: &Thread) -> Result<Cursor, Error> {
-        Cursor::new(*thread.thread, self.handle)
+        Cursor::new(*thread.thread as RawHandle, self.handle)
     }
 }
 

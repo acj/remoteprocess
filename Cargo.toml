@@ -13,8 +13,8 @@ edition="2021"
 [dependencies]
 libc = "0.2"
 log = "0.4"
-proc-maps = "0.3.1"
-read-process-memory = "0.1.6"
+proc-maps = "0.3.2"
+read-process-memory = { git = "https://github.com/acj/read-process-memory.git", branch = "migrate-to-windows-sys" }
 goblin = "0.6.1"
 memmap = "0.7.0"
 regex = ">=1.8.3"
@@ -32,6 +32,12 @@ lazy_static = "1.4.0"
 
 [target.'cfg(windows)'.dependencies]
 winapi = {version = "0.3", features = ["winbase", "consoleapi", "wincon", "handleapi", "timeapi", "processenv" ]}
+windows-sys = { version = "0.52.0", features = [
+  "Win32_Foundation",
+  "Win32_System_Diagnostics_Debug",
+  "Win32_System_SystemServices",
+  "Win32_System_Threading",
+] }
 
 [dev-dependencies]
 env_logger = "0.10"
